@@ -1,34 +1,53 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Field } from './components/GeneralInfo'
+import { EducationSection } from './components/EducBg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [readOnlyOne, setReadOnlyOne] = useState(false);
+  const buttonText = readOnlyOne ? "edit" : "done";
+  function handleClickOne(){
+    readOnlyOne ? setReadOnlyOne(false) : setReadOnlyOne(true);
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <form onSubmit={() => {}}>
+
+      <section>
+        <Field
+          type = "text"
+          id = "firstName"
+          label = "First Name"
+          min = {2}
+          max = {15}
+          readOnly = {readOnlyOne}
+        />
+
+        <Field
+          type = "text"
+          id = "lastName"
+          label = "Last Name"
+          min = {2}
+          max = {15}
+          readOnly = {readOnlyOne}
+
+        />
+
+        <Field
+          type = "tel"
+          id = "contact"
+          label = "Contact Number"
+          min = {11}
+          max = {11}
+          readOnly = {readOnlyOne}
+        />
+
+        <button type = "button" onClick={handleClickOne}>{buttonText}</button>
+      
+
+        <EducationSection/>
+      </section>
+    </form>
   )
 }
 
